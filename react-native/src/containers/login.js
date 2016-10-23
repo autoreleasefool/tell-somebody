@@ -48,6 +48,14 @@ export default class Login extends Component {
   isAdmin: boolean = false;
 
   _onSubmit(endpoint: string) {
+    if (endpoint === 'new') {
+      this.refs.SignupUsername.blur();
+      this.refs.SignupPassword.blur();
+    } else {
+      this.refs.LoginUsername.blur();
+      this.refs.LoginPassword.blur();
+    }
+
     const username = this.state.username;
     const password = this.state.password;
 
@@ -73,6 +81,10 @@ export default class Login extends Component {
     if (response.ok) {
       response.json()
           .then((responseJson) => {
+            this.setState({
+              username: '',
+              password: '',
+            });
             this.isAdmin = responseJson.is_admin;
             storeId(AsyncStorage, responseJson.id);
             storeToken(AsyncStorage, responseJson.auth_token);
@@ -100,6 +112,8 @@ export default class Login extends Component {
     return (
       <View>
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            ref='LoginUsername'
             autoCapitalize={'none'}
             autoCorrect={false}
             placeholder={'username'}
@@ -107,6 +121,8 @@ export default class Login extends Component {
             value={this.state.username}
             onChangeText={(text: string) => this.setState({username: text})} />
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            ref='LoginPassword'
             autoCapitalize={'none'}
             placeholder={'password'}
             secureTextEntry={true}
@@ -131,6 +147,8 @@ export default class Login extends Component {
     return (
       <View>
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            ref='SignupUsername'
             autoCapitalize={'none'}
             autoCorrect={false}
             placeholder={'username'}
@@ -138,6 +156,8 @@ export default class Login extends Component {
             value={this.state.username}
             onChangeText={(text: string) => this.setState({username: text})} />
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
+            ref='SignupPassword'
             autoCapitalize={'none'}
             placeholder={'password'}
             secureTextEntry={true}

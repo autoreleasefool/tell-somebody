@@ -119,12 +119,14 @@ export default class Commend extends Component {
     return (
       <View>
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
             autoCapitalize={'words'}
             placeholder={'who are you commending'}
             style={styles.input}
             value={this.state.receiverName}
             onChangeText={(text: string) => this.setState({receiverName: text})} />
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
             placeholder={'why they\'re great'}
             style={styles.multilineInput}
             multiline={true}

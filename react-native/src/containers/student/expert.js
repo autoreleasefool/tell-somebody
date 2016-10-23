@@ -47,6 +47,7 @@ export default class Expert extends Component {
       error: false,
       submitEnabled: true,
       textResponse: -1,
+      imageResponse: -1,
     }
   }
 
@@ -130,6 +131,49 @@ export default class Expert extends Component {
     );
   }
 
+  _renderImageInput() {
+    let text = null;
+    if (this.state.textResponse >= 0) {
+      if (this.state.textResponse < 0.1) {
+        text = <Text style={[styles.textResponse, styles.bad]}>{'this doesn\'t sound very good to us. have you spoken to anybody?'}</Text>;
+      } else if (this.state.textResponse < 0.25) {
+        text = <Text style={[styles.textResponse, styles.poor]}>{'that\'s not something good friends should say. if you\'re in an uncomfortable situation, it always helps to talk to someone.'}</Text>;
+      } else if (this.state.textResponse < 0.5) {
+        text = <Text style={[styles.textResponse, styles.uneasy]}>{'i don\'t feel too great after reading that. how about you? need somebody to talk to?'}</Text>;
+      } else if (this.state.textResponse < 0.75) {
+        text = <Text style={[styles.textResponse, styles.good]}>{'this sounds alright to us. if you\'re still not certain, remember, we aren\'t perfect. don\'t be afraid to speak up and ask someone for help.'}</Text>;
+      } else {
+        text = <Text style={[styles.textResponse, styles.great]}>{'we can\'t find anything wrong here, but nobody\'s perfect and if you\'re still not sure, ask a friend or adult you trust.'}</Text>;
+      }
+    }
+
+    return (
+      <View>
+        <View>
+          <Text style={styles.instructions}>{'upload an image or screenshot from your phone, and we\'ll let you know how we\'d feel about receiving a similar image.'}</Text>
+
+          {text}
+          {this.state.error
+          ? <View style={[styles.button, styles.redButton]}>
+              <Text style={[styles.login, {fontWeight: 'normal'}]}>{'there was an error submitting your text. please, try again later.'}</Text>
+            </View>
+          : null
+        }
+          <TouchableOpacity onPress={this._submitText.bind(this)}>
+            <View style={styles.button}>
+              <Text style={styles.login}>{'submit.'}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={this._switchOption.bind(this, NONE)}>
+          <View style={styles.button}>
+            <Text style={styles.login}>{'cancel.'}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   _renderTextInput() {
     let text = null;
     if (this.state.textResponse >= 0) {
@@ -151,6 +195,7 @@ export default class Expert extends Component {
         <View>
           <Text style={styles.instructions}>{'you can paste any text in the field below and we\'ll let you know how we\'d feel if we received a similar message.'}</Text>
           <TextInput
+              underlineColorAndroid={'rgba(0,0,0,0)'}
               placeholder={'your text'}
               style={styles.input}
               value={this.state.message}
@@ -185,7 +230,7 @@ export default class Expert extends Component {
     } else if (this.state.option === TEXT) {
       form = this._renderTextInput();
     } else if (this.state.option === IMAGE) {
-
+      form = this._renderImageInput();
     }
 
     return (

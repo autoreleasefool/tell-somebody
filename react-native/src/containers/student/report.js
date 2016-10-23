@@ -119,12 +119,14 @@ export default class Report extends Component {
     return (
       <View>
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
             autoCapitalize={'words'}
             placeholder={'name of the offender'}
             style={styles.input}
             value={this.state.offenderName}
             onChangeText={(text: string) => this.setState({offenderName: text})} />
         <TextInput
+            underlineColorAndroid={'rgba(0,0,0,0)'}
             placeholder={'the incident'}
             style={styles.multilineInput}
             multiline={true}
