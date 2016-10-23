@@ -46,7 +46,7 @@ export default class Resolve extends Component {
 
   _requestUnresolved() {
     fetch(
-      serverUrl + '/report/all',
+      serverUrl + '/commendation/unapproved',
       {
         method: 'GET',
         headers: {
@@ -59,15 +59,15 @@ export default class Resolve extends Component {
         .catch(this._handleResponse.bind(this));
   }
 
-  _onResolve(report: any, index: number) {
-    if (report.is_resolved) {
+  _onApprove(commendation: any, index: number) {
+    if (commendation.is_approved) {
       return;
     }
 
     retrieveToken(AsyncStorage)
         .then((token: string) =>
           fetch(
-            serverUrl + '/report/resolve',
+            serverUrl + '/commendation/approve',
             {
               method: 'POST',
               headers: {
@@ -76,7 +76,7 @@ export default class Resolve extends Component {
               },
               body: JSON.stringify({
                 auth_token: token,
-                report_id: report.id,
+                commendation_id: commendation.id,
               }),
             }
           )
@@ -105,32 +105,27 @@ export default class Resolve extends Component {
     }
   }
 
-  _renderRow(report: any, sectionIndex: number, rowIndex: number) {
+  _renderRow(commendation: any, sectionIndex: number, rowIndex: number) {
     let backgroundColor = 'rgba(0,0,0,0)';
     if (rowIndex % 2 === 1) {
       backgroundColor = 'rgba(0,0,0,0.1)';
     }
 
-    let resolvedColor = report.is_resolved ? 'rgba(0, 100, 0, 0.2)' : 'rgba(169,68,66, 0.2)'
-    const iconColor = report.is_resolved ? '#006400' : 'rgba(0, 0, 0, 0.5)';
-
     return (
-      <View style={{backgroundColor: resolvedColor}}>
-        <View style={{backgroundColor: backgroundColor}}>
-          <View style={[styles.report, {flexDirection: 'row', alignItems: 'center'}]}>
-            <View style={{flex: 1}}>
-              <Text style={styles.subtitle}>{'who? '}<Text style={styles.message}>{report.offender_name}</Text></Text>
-              <Text style={styles.subtitle}>{'why? '}<Text style={styles.message}>{report.message}</Text></Text>
-            </View>
-            <TouchableOpacity onPress={this._onResolve.bind(this, report, rowIndex)}>
-              <View style={styles.resolveContainer}>
-                <MaterialIcons
-                    size={24}
-                    color={iconColor}
-                    name={'check'} />
-              </View>
-            </TouchableOpacity>
+      <View style={{backgroundColor: backgroundColor}}>
+        <View style={[styles.report, {flexDirection: 'row', alignItems: 'center'}]}>
+          <View style={{flex: 1}}>
+            <Text style={styles.subtitle}>{'who? '}<Text style={styles.message}>{commendation.receiver_name}</Text></Text>
+            <Text style={styles.subtitle}>{'why? '}<Text style={styles.message}>{commendation.message}</Text></Text>
           </View>
+          <TouchableOpacity onPress={this._onApprove.bind(this, commendation, rowIndex)}>
+            <View style={styles.resolveContainer}>
+              <MaterialIcons
+                  size={24}
+                  color={'rgba(0, 0, 0, 0.5)'}
+                  name={'check'} />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -140,8 +135,8 @@ export default class Resolve extends Component {
     return (
       <View>
         <View style={styles.report}>
-          <Text style={styles.title}>{'these students look up to you as a role model.'}</Text>
-          <Text style={styles.title}>{'ensure you\'re paying them the attention they deserve.'}</Text>
+          <Text style={styles.title}>{'be proud of what your students can accomplish.'}</Text>
+          <Text style={styles.title}>{'then, let them be proud.'}</Text>
         </View>
         <View style={styles.thickSeparator} />
       </View>

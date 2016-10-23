@@ -14,7 +14,7 @@ import {
 const MaterialIcons = require('react-native-vector-icons/MaterialIcons');
 import Board from '../common/board';
 import Resolve from './resolve';
-// import Approve from './approve';
+import Approve from './approve';
 
 export const screens = {
   options: 0,
@@ -94,10 +94,10 @@ export default class Admin extends Component {
         return (
           <Resolve navigator={navigator} />
         );
-      // case screens.approve:
-      //   return (
-      //     <Commend navigator={navigator} />
-      //   );
+      case screens.approve:
+        return (
+          <Approve navigator={navigator} />
+        );
       default:
         return (
           <View />
