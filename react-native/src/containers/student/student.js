@@ -11,9 +11,10 @@ import {
   View,
 } from 'react-native';
 
+const MaterialIcons = require('react-native-vector-icons/MaterialIcons');
 import Report from './report';
 import Commend from './commend';
-import Board from './board';
+import Board from '../common/board';
 import Expert from './expert';
 
 export const screens = {
@@ -37,6 +38,16 @@ export default class Student extends Component {
   _renderOptions() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity onPress={() => this.props.navigator.pop()}>
+          <View style={styles.cancelButton}>
+            <MaterialIcons
+                size={24}
+                name={'arrow-back'}
+                style={styles.back}
+                color={'white'} />
+            <Text style={styles.cancel}>{'logout.'}</Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.content}>
           <View style={{flex: 1, justifyContent: 'space-around'}}>
 
@@ -111,12 +122,14 @@ export default class Student extends Component {
 
   render() {
     return (
-      <Navigator
-          configureScene={this._configureScene}
-          initialRoute={{id: screens.options}}
-          ref='Navigator'
-          renderScene={this._renderScene.bind(this)}
-          style={styles.container} />
+      <View style={styles.container}>
+        <Navigator
+            configureScene={this._configureScene}
+            initialRoute={{id: screens.options}}
+            ref='Navigator'
+            renderScene={this._renderScene.bind(this)}
+            style={styles.container} />
+      </View>
     );
   }
 }
@@ -163,5 +176,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     textDecorationLine: 'underline',
+  },
+  back: {
+    margin: 8,
+  },
+  cancel: {
+    color: 'white',
+    textAlign: 'left',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  cancelButton: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    height: 50,
   },
 });

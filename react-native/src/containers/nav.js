@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 
 import Login from './login'
-import Student from './student'
+import Student from './student/student'
+import Admin from './admin/admin'
 
 export const screens = {
   login: 0,
@@ -34,6 +35,10 @@ export default class Nav extends Component {
       case screens.student:
         return (
           <Student navigator={navigator} />
+        );
+      case screens.admin:
+        return (
+          <Admin navigator={navigator} />
         );
       default:
         return (

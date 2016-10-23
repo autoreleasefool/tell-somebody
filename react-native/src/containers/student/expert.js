@@ -212,6 +212,7 @@ export default class Expert extends Component {
 }
 
 const elementSpacing = 4;
+const textSpacing = 8;
 
 const styles = StyleSheet.create({
   container: {
@@ -241,6 +242,8 @@ const styles = StyleSheet.create({
   instructions: {
     fontSize: 16,
     color: 'black',
+    marginLeft: textSpacing,
+    marginRight: textSpacing,
     marginTop: elementSpacing,
     marginBottom: elementSpacing,
   },
@@ -270,9 +273,11 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 16,
     fontWeight: 'bold',
-    marginLeft: 8,
+    marginLeft: textSpacing,
   },
   textResponse: {
+    marginLeft: textSpacing,
+    marginRight: textSpacing,
     marginTop: elementSpacing,
     marginBottom: elementSpacing,
     fontSize: 16,
