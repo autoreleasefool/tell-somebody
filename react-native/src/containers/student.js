@@ -14,6 +14,7 @@ import {
 import Report from './report';
 import Commend from './commend';
 import Board from './board';
+import Expert from './expert';
 
 export const screens = {
   options: 0,
@@ -96,6 +97,10 @@ export default class Student extends Component {
       case screens.board:
         return (
           <Board navigator={navigator} />
+        );
+      case screens.expert:
+        return (
+          <Expert navigator={navigator} />
         );
       default:
         return (
