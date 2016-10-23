@@ -115,16 +115,11 @@ export default class Expert extends Component {
     return (
       <View>
         <Text style={styles.instructions}>{'feeling a bit uneasy at something somebody sent you?'}</Text>
-        <Text style={styles.instructions}>{'with this tool, you can upload text or an image and we\'ll do our best to tell you how we\'d feel if we received something similar.'}</Text>
+        <Text style={styles.instructions}>{'with this tool, you can upload text and we\'ll do our best to tell you how we\'d feel if we received something similar.'}</Text>
         <Text style={styles.instructions}>{'this tool is 100% anonymous and it\'s up to you what to do with the advice given.'}</Text>
         <TouchableOpacity onPress={this._switchOption.bind(this, TEXT)}>
           <View style={styles.button}>
             <Text style={styles.login}>{'paste some text.'}</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this._switchOption.bind(this, IMAGE)}>
-          <View style={styles.button}>
-            <Text style={styles.login}>{'upload an image.'}</Text>
           </View>
         </TouchableOpacity>
       </View>
