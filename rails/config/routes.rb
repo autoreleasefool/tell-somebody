@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   post 'commendation/new'
   post 'commendation/approve'
   get 'commendation/approved'
+  get 'commendation/unapproved'
 
   post'report/new'
   post 'report/resolve'
+  get 'report/resolved'
+  get 'report/unresolved'
 
   post 'user/new'
   post 'user/login'

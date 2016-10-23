@@ -39,7 +39,12 @@ class CommendationController < ApplicationController
   end
 
   def approved
-    commendations = Commendation.all.where(is_approved: true)
+    commendations = Commendation.all.where(is_approved: true).order('created_at DESC')
+    render json: commendations
+  end
+
+  def unapproved
+    commendations = Commendation.all.where(is_approved: false).order('created_at DESC')
     render json: commendations
   end
 

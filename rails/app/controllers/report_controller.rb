@@ -34,6 +34,16 @@ class ReportController < ApplicationController
     end
   end
 
+  def resolved
+    reports = Report.all.where(is_resolved: true).order('created_at DESC')
+    render json: reports
+  end
+
+  def all
+    reports = Report.all.order('created_at DESC')
+    render json: reports
+  end
+
   private
 
   def report_params
