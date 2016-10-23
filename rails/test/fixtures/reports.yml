@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: MyString
+  is_anonymous: false
+  is_resolved: false
+
+two:
+  message: MyString
+  is_anonymous: false
+  is_resolved: false
