@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post'report/new'
   post 'report/resolve'
   get 'report/resolved'
-  get 'report/unresolved'
+  get 'report/all'
 
   post 'user/new'
   post 'user/login'
