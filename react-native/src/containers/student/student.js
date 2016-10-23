@@ -73,7 +73,7 @@ export default class Student extends Component {
               <Text style={styles.body}>{'do you think your friends might be taking the jokes too far?'}</Text>
               <TouchableOpacity onPress={this._switchScene.bind(this, screens.expert)}>
                 <View style={styles.button}>
-                  <Text style={styles.login}>{'ask an expert.'}</Text>
+                  <Text style={styles.login}>{'ask for advice.'}</Text>
                 </View>
               </TouchableOpacity>
             </View>
